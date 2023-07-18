@@ -6,12 +6,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/admin">
-          <Route path="" element={<Texture />} />
-        </Route>
-        <Route path="/">
-          <Route path="" element={<AdminPage />} />
-        </Route>
+          <Route path="/" element={<Texture />} />
+          <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
