@@ -383,7 +383,7 @@ const Geometry = () => {
         model3 = models[2];
         model4 = models[3];   
         
-        await delay(2000);
+        console.log(models);
 
         loadInfoObjects();
         loadModels();
