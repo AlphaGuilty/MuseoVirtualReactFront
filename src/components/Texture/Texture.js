@@ -252,6 +252,7 @@ const Geometry = () => {
       fbxLoader.load(
         test,
         function (fbx) {
+          console.log(THREE.REVISION);
           console.log(test);
           fbx.traverse(function (child) {
             if (child.isMesh) {
