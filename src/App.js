@@ -6,7 +6,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-          <Route path="/home" element={<Texture />} />
+          <Route path="/" element={<Texture />} />
+      </Routes>
+      <Routes>
           <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
