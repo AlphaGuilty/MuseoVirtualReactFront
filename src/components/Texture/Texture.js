@@ -242,6 +242,7 @@ const Geometry = () => {
     const loadModels = () => {
       // Load FBX Model 1
       console.log(model1);
+      console.log(model1.model3D);
       const fbxLoader = new FBXLoader();
       fbxLoader.load(
         process.env.REACT_APP_API_URL+"/model/"+model1.model3D,
