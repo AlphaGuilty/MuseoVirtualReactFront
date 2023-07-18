@@ -250,8 +250,9 @@ const Geometry = () => {
       console.log(test2);
       const fbxLoader = new FBXLoader();
       fbxLoader.load(
-        process.env.REACT_APP_API_URL+"/model/"+model1.model3D,
+        test,
         function (fbx) {
+          console.log(test);
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
