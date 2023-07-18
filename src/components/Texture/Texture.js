@@ -365,7 +365,7 @@ const Geometry = () => {
       axios.get(process.env.REACT_APP_API_URL+"/"),
       axios.get(process.env.REACT_APP_API_URL+"/model")
     ])
-      .then(([pictureResponse, modelResponse]) => {
+      .then(async ([pictureResponse, modelResponse]) => {
         const pictures = pictureResponse.data;
         const models = modelResponse.data;
 
@@ -381,7 +381,9 @@ const Geometry = () => {
         model1 = models[0];
         model2 = models[1];
         model3 = models[2];
-        model4 = models[3];
+        model4 = models[3];   
+        
+        await delay(2000);
 
         loadInfoObjects();
         loadModels();
