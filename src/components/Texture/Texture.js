@@ -250,7 +250,7 @@ const Geometry = () => {
       console.log(test2);
       const fbxLoader = new FBXLoader();
       fbxLoader.load(
-        test,
+        "https://museovirtualreactapi.onrender.com/model/model_1689684826600.fbx",
         function (fbx) {
           console.log(THREE.REVISION);
           console.log(test);
