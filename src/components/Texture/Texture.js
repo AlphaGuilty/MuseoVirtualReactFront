@@ -4,10 +4,11 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import Swal from "sweetalert2";
 import axios from "axios";
 
+
 const Geometry = () => {
   const mountRef = useRef(null); 
 
-  useEffect(() => {
+  useEffect(() => {    
     const roomWidth = 75;
     const roomHeight = 75;
     const floorY = -4.5;
@@ -136,7 +137,7 @@ const Geometry = () => {
 
     const loadInfoObjects = () => {
       //Load Picture 1
-      const picture1Texture = textureLoader.load("http://localhost:8081/images/"+picture1.imagen);
+      const picture1Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture1.imagen);
       const picture1Material = new THREE.MeshBasicMaterial({ map: picture1Texture });
       const picture1Geometry = new THREE.PlaneGeometry(picture1.ancho, picture1.alto);
       const picture1Mesh = new THREE.Mesh(picture1Geometry, picture1Material);
@@ -148,7 +149,7 @@ const Geometry = () => {
       infoObjects.add(picture1Mesh);
 
       //Load Picture 2
-      const picture2Texture = textureLoader.load("http://localhost:8081/images/"+picture2.imagen);
+      const picture2Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture2.imagen);
       const picture2Material = new THREE.MeshBasicMaterial({ map: picture2Texture });
       const picture2Geometry = new THREE.PlaneGeometry(picture2.ancho, picture2.alto);
       const picture2Mesh = new THREE.Mesh(picture2Geometry, picture2Material);
@@ -160,7 +161,7 @@ const Geometry = () => {
       infoObjects.add(picture2Mesh);
 
       //Load Picture 3
-      const picture3Texture = textureLoader.load("http://localhost:8081/images/"+picture3.imagen);
+      const picture3Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture3.imagen);
       const picture3Material = new THREE.MeshBasicMaterial({ map: picture3Texture });
       const picture3Geometry = new THREE.PlaneGeometry(picture3.ancho, picture3.alto);
       const picture3Mesh = new THREE.Mesh(picture3Geometry, picture3Material);
@@ -173,7 +174,7 @@ const Geometry = () => {
       infoObjects.add(picture3Mesh);
 
       //Load Picture 4
-      const picture4Texture = textureLoader.load("http://localhost:8081/images/"+picture4.imagen);
+      const picture4Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture4.imagen);
       const picture4Material = new THREE.MeshBasicMaterial({ map: picture4Texture });
       const picture4Geometry = new THREE.PlaneGeometry(picture4.ancho, picture4.alto);
       const picture4Mesh = new THREE.Mesh(picture4Geometry, picture4Material);
@@ -186,7 +187,7 @@ const Geometry = () => {
       infoObjects.add(picture4Mesh);
 
       //Load Picture 5
-      const picture5Texture = textureLoader.load("http://localhost:8081/images/"+picture5.imagen);
+      const picture5Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture5.imagen);
       const picture5Material = new THREE.MeshBasicMaterial({ map: picture5Texture });
       const picture5Geometry = new THREE.PlaneGeometry(picture5.ancho, picture5.alto);
       const picture5Mesh = new THREE.Mesh(picture5Geometry, picture5Material);
@@ -199,7 +200,7 @@ const Geometry = () => {
       infoObjects.add(picture5Mesh);
 
       //Load Picture 6
-      const picture6Texture = textureLoader.load("http://localhost:8081/images/"+picture6.imagen);
+      const picture6Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture6.imagen);
       const picture6Material = new THREE.MeshBasicMaterial({ map: picture6Texture });
       const picture6Geometry = new THREE.PlaneGeometry(picture6.ancho, picture6.alto);
       const picture6Mesh = new THREE.Mesh(picture6Geometry, picture6Material);
@@ -212,7 +213,7 @@ const Geometry = () => {
       infoObjects.add(picture6Mesh);
 
       //Load Picture 7
-      const picture7Texture = textureLoader.load("http://localhost:8081/images/"+picture7.imagen);
+      const picture7Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture7.imagen);
       const picture7Material = new THREE.MeshBasicMaterial({ map: picture7Texture });
       const picture7Geometry = new THREE.PlaneGeometry(picture7.ancho, picture7.alto);
       const picture7Mesh = new THREE.Mesh(picture7Geometry, picture7Material);
@@ -225,7 +226,7 @@ const Geometry = () => {
       infoObjects.add(picture7Mesh);
 
       //Load Picture 8
-      const picture8Texture = textureLoader.load("http://localhost:8081/images/"+picture8.imagen);
+      const picture8Texture = textureLoader.load(process.env.REACT_APP_API_URL+"/images/"+picture8.imagen);
       const picture8Material = new THREE.MeshBasicMaterial({ map: picture8Texture });
       const picture8Geometry = new THREE.PlaneGeometry(picture8.ancho, picture8.alto);
       const picture8Mesh = new THREE.Mesh(picture8Geometry, picture8Material);
@@ -242,12 +243,12 @@ const Geometry = () => {
       // Load FBX Model 1
       const fbxLoader = new FBXLoader();
       fbxLoader.load(
-        "http://localhost:8081/model/"+model1.model3D,
+        process.env.REACT_APP_API_URL+"/model/"+model1.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
-              var texture = textureLoader.load("http://localhost:8081/model/"+model1.textura);
+              var texture = textureLoader.load(process.env.REACT_APP_API_URL+"/model/"+model1.textura);
               child.material.map = texture;
 
               child.userData = {
@@ -270,13 +271,13 @@ const Geometry = () => {
 
       // Load FBX Model 2
       fbxLoader.load(
-        "http://localhost:8081/model/"+model2.model3D,
+        process.env.REACT_APP_API_URL+"/model/"+model2.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
-              var texture = textureLoader.load("http://localhost:8081/model/"+model2.textura);
-              console.log("http://localhost:8081/model/"+model2.textura);
+              var texture = textureLoader.load(process.env.REACT_APP_API_URL+"/model/"+model2.textura);
+              console.log(process.env.REACT_APP_API_URL+"/model/"+model2.textura);
               child.material.map = texture;
 
               child.userData = {
@@ -299,13 +300,13 @@ const Geometry = () => {
 
       // Load FBX Model 3
       fbxLoader.load(
-        "http://localhost:8081/model/" + model3.model3D,
+        process.env.REACT_APP_API_URL+"/model/" + model3.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
               var texture = textureLoader.load(
-                "http://localhost:8081/model/" + model3.textura
+                process.env.REACT_APP_API_URL+"/model/" + model3.textura
               );
               child.material.map = texture;
       
@@ -329,13 +330,13 @@ const Geometry = () => {
       
       // Load FBX Model 4
       fbxLoader.load(
-        "http://localhost:8081/model/" + model4.model3D,
+        process.env.REACT_APP_API_URL+"/model/" + model4.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
               var texture = textureLoader.load(
-                "http://localhost:8081/model/" + model4.textura
+                process.env.REACT_APP_API_URL+"/model/" + model4.textura
               );
               child.material.map = texture;
       
@@ -361,8 +362,8 @@ const Geometry = () => {
 
     //Load Info from DB
     Promise.all([
-      axios.get("http://localhost:8081/"),
-      axios.get("http://localhost:8081/model")
+      axios.get(process.env.REACT_APP_API_URL+"/"),
+      axios.get(process.env.REACT_APP_API_URL+"/model")
     ])
       .then(([pictureResponse, modelResponse]) => {
         const pictures = pictureResponse.data;

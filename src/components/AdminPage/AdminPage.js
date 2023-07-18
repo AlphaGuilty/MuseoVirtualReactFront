@@ -8,6 +8,8 @@ import './adminPage.css';
 const AdminPage = () => {
   const [sections, setSections] = useState(Array(8).fill({ file: null, name: '', description: '', id: '' }));
   const [sections2, setSections2] = useState(Array(4).fill({ file: null, name: '', description: '', id: '', size: '', tall: '', rotation: '', image: null }));
+  const apiUrl = process.env.REACT_APP_API_URL;
+  console.log(process.env.REACT_APP_API_URL);
 
   const handleFileChange = (e, index) => {
     const newSections = [...sections];
@@ -33,7 +35,7 @@ const AdminPage = () => {
     formData.append('name', sections[index].name);
     formData.append('description', sections[index].description);
 
-    axios.post(`http://localhost:8081/upload/${index + 1}`, formData)
+    axios.post(process.env.REACT_APP_API_URL+`/upload/${index + 1}`, formData)
       .then(res => {
         console.log(res);
         Swal.fire({
@@ -98,7 +100,7 @@ const AdminPage = () => {
     formData.append('rotation', sections2[index].rotation);
     formData.append('texture', sections2[index].image);
 
-    axios.post(`http://localhost:8081/uploadModel/${index + 1}`, formData)
+    axios.post(process.env.REACT_APP_API_URL+`/uploadModel/${index + 1}`, formData)
       .then(res => {
         console.log(res);
         Swal.fire({
