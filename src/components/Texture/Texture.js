@@ -4,9 +4,8 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-
 const Geometry = () => {
-  const mountRef = useRef(null); 
+  const mountRef = useRef(null);
 
   useEffect(() => {    
     const roomWidth = 75;
@@ -241,19 +240,10 @@ const Geometry = () => {
 
     const loadModels = () => {
       // Load FBX Model 1
-      const test = process.env.REACT_APP_API_URL+"/model/"+model1.model3D;
-      const test2 = model1.model3D;
-      console.log(model1);
-      console.log(model1.model3D);
-      console.log(process.env.REACT_APP_API_URL+"/model/"+model1.model3D);
-      console.log(test);
-      console.log(test2);
       const fbxLoader = new FBXLoader();
       fbxLoader.load(
-        "https://museovirtualreactapi.onrender.com/model/model_1689684826600.fbx",
+        process.env.REACT_APP_API_URL+"/model/"+model1.model3D,
         function (fbx) {
-          console.log(THREE.REVISION);
-          console.log(test);
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
@@ -390,8 +380,7 @@ const Geometry = () => {
         model1 = models[0];
         model2 = models[1];
         model3 = models[2];
-        model4 = models[3];        
-        
+        model4 = models[3];   
 
         loadInfoObjects();
         loadModels();
@@ -400,52 +389,59 @@ const Geometry = () => {
         console.error("Error fetching data:", error);
       });
 
+    Swal.fire({
+      title: "¡Bienvenido!",
+      imageUrl: "../../../controles.png",
+      text: "Haz clic en una imagen o modelo para tener más información",
+      confirmButtonText: "Cerrar"
+    });
+
     // Add click event listener for object selection
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
     let enableObjectDetection = true;
 
-   function onMouseClick(event) {
-  // Calculate normalized device coordinates
-  mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-  mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+    function onMouseClick(event) {
+    // Calculate normalized device coordinates
+    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+    mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 
-  // Cast a ray from the camera to the clicked position
-  raycaster.setFromCamera(mouse, camera);
+    // Cast a ray from the camera to the clicked position
+    raycaster.setFromCamera(mouse, camera);
 
-  // Find intersected objects in infoObjects
-  const infoIntersects = raycaster.intersectObjects(infoObjects.children, true);
+    // Find intersected objects in infoObjects
+    const infoIntersects = raycaster.intersectObjects(infoObjects.children, true);
 
-  
-  if (!enableObjectDetection) {
-    return;
+    
+    if (!enableObjectDetection) {
+      return;
+    }
+
+    if (infoIntersects.length > 0) {
+      const selectedObject = infoIntersects[0].object;
+
+      // Obtener la información personalizada del objeto
+      const { name, description } = selectedObject.userData;
+      console.log(selectedObject);
+
+      // Mostrar información en el pop-up
+      Swal.fire({
+        title: `${name}`,
+        html: `<div style="text-align: justify;">${description}</div>`,
+        icon: "info",
+        confirmButtonText: "Close"
+      }).then(async (result) => {
+        // Reactivar la detección de objetos después de cerrar el pop-up
+        await delay(250);
+        enableObjectDetection = true;
+      });
+
+      // Desactivar la detección de objetos mientras se muestra el pop-up
+      setTimeout(console.log, 3000);
+      enableObjectDetection = false;
+    }
   }
-
-  if (infoIntersects.length > 0) {
-    const selectedObject = infoIntersects[0].object;
-
-    // Obtener la información personalizada del objeto
-    const { name, description } = selectedObject.userData;
-    console.log(selectedObject);
-
-    // Mostrar información en el pop-up
-    Swal.fire({
-      title: `${name}`,
-      html: `${description}`,
-      icon: "info",
-      confirmButtonText: "Close"
-    }).then(async (result) => {
-      // Reactivar la detección de objetos después de cerrar el pop-up
-      await delay(250);
-      enableObjectDetection = true;
-    });
-
-    // Desactivar la detección de objetos mientras se muestra el pop-up
-    setTimeout(console.log, 3000);
-    enableObjectDetection = false;
-  }
-}
 
 // Función de retraso usando async/await
 function delay(ms) {

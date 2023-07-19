@@ -34,6 +34,7 @@ const AdminPage = () => {
     formData.append('image', sections[index].file);
     formData.append('name', sections[index].name);
     formData.append('description', sections[index].description);
+    formData.append('id', index+1);
 
     axios.post(process.env.REACT_APP_API_URL+`/upload/${index + 1}`, formData)
       .then(res => {
@@ -99,6 +100,7 @@ const AdminPage = () => {
     formData.append('tall', sections2[index].tall);
     formData.append('rotation', sections2[index].rotation);
     formData.append('texture', sections2[index].image);
+    formData.append('id', index+1);
 
     axios.post(process.env.REACT_APP_API_URL+`/uploadModel/${index + 1}`, formData)
       .then(res => {

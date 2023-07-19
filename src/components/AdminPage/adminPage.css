@@ -15,6 +15,7 @@ body {
 .description-container {
     background-color: #F1F6F9;
     color: #212A3E;
+    width: 800px;
  }
 
 .rounded-image {
