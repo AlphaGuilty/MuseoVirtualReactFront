@@ -3,9 +3,10 @@ import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import Swal from "sweetalert2";
 import axios from "axios";
+import controlesImage from "./controles.png";
 
 const Geometry = () => {
-  const mountRef = useRef(null);
+  const mountRef = useRef(null); 
 
   useEffect(() => {    
     const roomWidth = 75;
@@ -380,7 +381,7 @@ const Geometry = () => {
         model1 = models[0];
         model2 = models[1];
         model3 = models[2];
-        model4 = models[3];   
+        model4 = models[3]; 
 
         loadInfoObjects();
         loadModels();
@@ -600,11 +601,10 @@ function delay(ms) {
   });
 
   return (
-    <div
-      className="Contenedor3D"
-      ref={mountRef}
-      style={{ width: "100%", height: "100vh" }}
-    ></div>
+    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+      <div className="Contenedor3D" ref={mountRef} style={{ width: "100%", height: "100%" }}></div>
+      <img src={controlesImage} alt="Controles" style={{ position: "absolute", bottom: "20px", right: "20px", opacity: "0.7" , zIndex: "9999" }} />
+    </div>
   );
 };
 
