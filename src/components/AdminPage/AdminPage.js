@@ -46,7 +46,15 @@ const AdminPage = () => {
           confirmButtonText: 'OK'
         });
       })
-      .catch(err => console.log(err));
+      .catch(err =>{ 
+        console.log(err);
+        Swal.fire({
+          title: 'Error al enviar',
+          text: 'No se pudo enviar el cuadro. El campo Archivo de Imagen debe tener archivo',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
   }
 
   const handleFileChange2 = (e, index) => {
@@ -112,7 +120,15 @@ const AdminPage = () => {
           confirmButtonText: 'OK'
         });
       })
-      .catch(err => console.log(err));
+      .catch(err =>{ 
+        console.log(err);
+        Swal.fire({
+          title: 'Error al enviar',
+          text: 'No se pudo enviar el modelo. Los campos Modelo FBX y Textura deben tener archivo',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
   }
 
   return (
