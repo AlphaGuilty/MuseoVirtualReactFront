@@ -243,12 +243,12 @@ const Geometry = () => {
       // Load FBX Model 1
       const fbxLoader = new FBXLoader();
       fbxLoader.load(
-        process.env.REACT_APP_API_URL+"/model/"+model1.model3D,
+        process.env.REACT_APP_API_URL + "/model/" + model1.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
-              var texture = textureLoader.load(process.env.REACT_APP_API_URL+"/model/"+model1.textura);
+              var texture = textureLoader.load(process.env.REACT_APP_API_URL + "/model/" + model1.textura);
               child.material.map = texture;
 
               child.userData = {
@@ -257,11 +257,22 @@ const Geometry = () => {
               };
             }
           });
-      
+
           fbx.scale.set(model1.size, model1.size, model1.size);
-          fbx.position.set(-roomHeight/4, model1.altura, -roomWidth/4);
-          fbx.rotation.y = model1.rotacion
+          fbx.position.set(-roomHeight / 4, model1.altura, -roomWidth / 4);
+          fbx.rotation.y = model1.rotacion;
           infoObjects.add(fbx);
+
+          // Add transparent cube to the center
+          const cubeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x00ff00,
+            opacity: 0,
+            transparent: true,
+          });
+          const cubeGeometry = new THREE.BoxGeometry(2, 10, 2);
+          const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+          cubeMesh.position.copy(fbx.position);
+          collisionObjects.add(cubeMesh);
         },
         undefined,
         function (error) {
@@ -271,13 +282,12 @@ const Geometry = () => {
 
       // Load FBX Model 2
       fbxLoader.load(
-        process.env.REACT_APP_API_URL+"/model/"+model2.model3D,
+        process.env.REACT_APP_API_URL + "/model/" + model2.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
-              var texture = textureLoader.load(process.env.REACT_APP_API_URL+"/model/"+model2.textura);
-              console.log(process.env.REACT_APP_API_URL+"/model/"+model2.textura);
+              var texture = textureLoader.load(process.env.REACT_APP_API_URL + "/model/" + model2.textura);
               child.material.map = texture;
 
               child.userData = {
@@ -286,11 +296,61 @@ const Geometry = () => {
               };
             }
           });
-      
+
           fbx.scale.set(model2.size, model2.size, model2.size);
-          fbx.position.set(roomHeight/4, model2.altura, -roomWidth/4);
-          fbx.rotation.y = model2.rotacion
+          fbx.position.set(roomHeight / 4, model2.altura, -roomWidth / 4);
+          fbx.rotation.y = model2.rotacion;
           infoObjects.add(fbx);
+
+          // Add transparent cube to the center
+          const cubeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x00ff00,
+            opacity: 0,
+            transparent: true,
+          });
+          const cubeGeometry = new THREE.BoxGeometry(2, 10, 2);
+          const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+          cubeMesh.position.copy(fbx.position);
+          collisionObjects.add(cubeMesh);
+        },
+        undefined,
+        function (error) {
+          collisionObjects.error(error);
+        }
+      );
+
+      // Load FBX Model 3
+      fbxLoader.load(
+        process.env.REACT_APP_API_URL + "/model/" + model3.model3D,
+        function (fbx) {
+          fbx.traverse(function (child) {
+            if (child.isMesh) {
+              var textureLoader = new THREE.TextureLoader();
+              var texture = textureLoader.load(process.env.REACT_APP_API_URL + "/model/" + model3.textura);
+              child.material.map = texture;
+
+              child.userData = {
+                name: model3.nombre,
+                description: model3.descripcion,
+              };
+            }
+          });
+
+          fbx.scale.set(model3.size, model3.size, model3.size);
+          fbx.position.set(-roomHeight / 4, model3.altura, roomWidth / 4);
+          fbx.rotation.y = model3.rotacion;
+          infoObjects.add(fbx);
+
+          // Add transparent cube to the center
+          const cubeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x00ff00,
+            opacity: 0,
+            transparent: true,
+          });
+          const cubeGeometry = new THREE.BoxGeometry(2, 10, 2);
+          const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+          cubeMesh.position.copy(fbx.position);
+          collisionObjects.add(cubeMesh);
         },
         undefined,
         function (error) {
@@ -298,67 +358,45 @@ const Geometry = () => {
         }
       );
 
-      // Load FBX Model 3
-      fbxLoader.load(
-        process.env.REACT_APP_API_URL+"/model/" + model3.model3D,
-        function (fbx) {
-          fbx.traverse(function (child) {
-            if (child.isMesh) {
-              var textureLoader = new THREE.TextureLoader();
-              var texture = textureLoader.load(
-                process.env.REACT_APP_API_URL+"/model/" + model3.textura
-              );
-              child.material.map = texture;
-      
-              child.userData = {
-                name: model3.nombre,
-                description: model3.descripcion,
-              };
-            }
-          });
-      
-          fbx.scale.set(model3.size, model3.size, model3.size);
-          fbx.position.set(-roomHeight/4, model3.altura, roomWidth/4);
-          fbx.rotation.y = model3.rotacion;
-          infoObjects.add(fbx);
-        },
-        undefined,
-        function (error) {
-          console.error(error);
-        }
-      );
-      
       // Load FBX Model 4
       fbxLoader.load(
-        process.env.REACT_APP_API_URL+"/model/" + model4.model3D,
+        process.env.REACT_APP_API_URL + "/model/" + model4.model3D,
         function (fbx) {
           fbx.traverse(function (child) {
             if (child.isMesh) {
               var textureLoader = new THREE.TextureLoader();
-              var texture = textureLoader.load(
-                process.env.REACT_APP_API_URL+"/model/" + model4.textura
-              );
+              var texture = textureLoader.load(process.env.REACT_APP_API_URL + "/model/" + model4.textura);
               child.material.map = texture;
-      
+
               child.userData = {
                 name: model4.nombre,
                 description: model4.descripcion,
               };
             }
           });
-      
+
           fbx.scale.set(model4.size, model4.size, model4.size);
-          fbx.position.set(roomHeight/4, model4.altura, roomWidth/4);
+          fbx.position.set(roomHeight / 4, model4.altura, roomWidth / 4);
           fbx.rotation.y = model4.rotacion;
           infoObjects.add(fbx);
+
+          // Add transparent cube to the center
+          const cubeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x00ff00,
+            opacity: 0,
+            transparent: true,
+          });
+          const cubeGeometry = new THREE.BoxGeometry(2, 10, 2);
+          const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+          cubeMesh.position.copy(fbx.position);
+          collisionObjects.add(cubeMesh);
         },
         undefined,
         function (error) {
           console.error(error);
         }
-      );     
-          
-    }
+      );
+    };
 
     //Load Info from DB
     Promise.all([
@@ -381,7 +419,7 @@ const Geometry = () => {
         model1 = models[0];
         model2 = models[1];
         model3 = models[2];
-        model4 = models[3]; 
+        model4 = models[3];
 
         loadInfoObjects();
         loadModels();
