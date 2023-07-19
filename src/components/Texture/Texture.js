@@ -251,7 +251,7 @@ const Geometry = () => {
               child.material.map = texture;
 
               child.userData = {
-                name: model1.name,
+                name: model1.nombre,
                 description: model1.descripcion,
               };
             }
@@ -280,7 +280,7 @@ const Geometry = () => {
               child.material.map = texture;
 
               child.userData = {
-                name: model2.name,
+                name: model2.nombre,
                 description: model2.descripcion,
               };
             }
@@ -310,7 +310,7 @@ const Geometry = () => {
               child.material.map = texture;
       
               child.userData = {
-                name: model3.name,
+                name: model3.nombre,
                 description: model3.descripcion,
               };
             }
@@ -340,7 +340,7 @@ const Geometry = () => {
               child.material.map = texture;
       
               child.userData = {
-                name: model4.name,
+                name: model4.nombre,
                 description: model4.descripcion,
               };
             }
